@@ -4,6 +4,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const logger = require('../logger')(__filename);
+
 const FILE_TYPES = 'types.js';
 const FILE_RESOLVERS = 'resolvers.js';
 
@@ -14,7 +16,7 @@ const mappedTypesAndResolvers = fs
   })
   .filter((file) => file.isDirectory())
   .map((dir) => {
-    console.log('[GRAPHQL] -> Gonna load types and resolvers from', dir.name);
+    logger.info('[GRAPHQL] -> Gonna load types and resolvers from', dir.name);
 
     const pathToTypes = path.join(__dirname, dir.name, FILE_TYPES);
     const pathToResolvers = path.join(__dirname, dir.name, FILE_RESOLVERS);
@@ -22,7 +24,7 @@ const mappedTypesAndResolvers = fs
     const types = require(pathToTypes);
     const resolvers = require(pathToResolvers);
 
-    console.log('[GRAPHQL] -> Loaded types and resolvers from', dir.name);
+    logger.info(`[GRAPHQL] -> Loaded types and resolvers from ${dir.name}`);
 
     return { types, resolvers };
   })

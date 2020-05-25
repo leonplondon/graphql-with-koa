@@ -5,6 +5,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const logger = require('../logger')(__filename);
+
 const JS_EXTENSION = '.js';
 const CONFIG_LOADER_FILE = 'index.js';
 
@@ -25,7 +27,7 @@ const isConfigurationFile = (dirent) => {
 const loadConfigurationModule = (dirent) => require(path.join(__dirname, dirent.name));
 
 const loadConfiguration = () => {
-  console.log('Gonna load configuration files');
+  logger.info('Gonna load configuration files');
 
   const files = fs.readdirSync(__dirname, {
     encoding: null,
@@ -39,7 +41,7 @@ const loadConfiguration = () => {
   const configurations = compactConfigurations(configurationModules);
 
   const configuredSources = Object.keys(configurations);
-  console.log('Loaded configuration sources', configuredSources);
+  logger.info('Loaded configuration sources', configuredSources);
 
   return configurations;
 };

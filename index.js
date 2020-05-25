@@ -4,6 +4,8 @@ const koaBody = require('koa-bodyparser');
 
 const { ApolloServer } = require('apollo-server-koa');
 
+const logger = require('./logger')(__filename);
+
 const { ServerConfiguration } = require('./config');
 const { typeDefs, resolvers } = require('./graphql');
 
@@ -31,5 +33,5 @@ app
 
 app.listen(
   ServerConfiguration.getPort(),
-  () => console.log(`Server up!!! ${ServerConfiguration.getPort()}`),
+  () => logger.info(`Server up!!! ${ServerConfiguration.getPort()}`),
 );
