@@ -1,8 +1,8 @@
-const Koa = require('koa');
-const KoaRouter = require('@koa/router');
-const koaBody = require('koa-bodyparser');
-
 const { ApolloServer } = require('apollo-server-koa');
+
+const Koa = require('koa');
+const koaBody = require('koa-bodyparser');
+const KoaRouter = require('@koa/router');
 
 const logger = require('./logger')(__filename);
 
@@ -12,26 +12,34 @@ const { typeDefs, resolvers } = require('./graphql');
 const app = new Koa();
 const router = new KoaRouter();
 
-const server = new ApolloServer({ typeDefs, resolvers });
+(async () => {
+  const server = new ApolloServer({
+    resolvers,
+    typeDefs,
+    playground: process.env.NODE_ENV !== 'production',
+  });
 
-server.applyMiddleware({
-  app,
-  cors: {
-    allowMethods: ['post', 'get'],
-    origin: '*',
-  },
-  path: '/graphql',
-});
+  await server.start();
 
-app
-  .use(koaBody({
-    enableTypes: ['json'],
-    jsonLimit: 2048,
-  }))
-  .use(router.routes())
-  .use(router.allowedMethods());
+  server.applyMiddleware({
+    app,
+    cors: {
+      allowMethods: ['post', 'get'],
+      origin: '*',
+    },
+    path: '/graphql',
+  });
 
-app.listen(
-  ServerConfiguration.getPort(),
-  () => logger.info(`Server up!!! ${ServerConfiguration.getPort()}`),
-);
+  app
+    .use(koaBody({
+      enableTypes: ['json'],
+      jsonLimit: 2048,
+    }))
+    .use(router.routes())
+    .use(router.allowedMethods());
+
+  app.listen(
+    ServerConfiguration.getPort(),
+    () => logger.info(`Server up!!! ${ServerConfiguration.getPort()}`),
+  );
+})();

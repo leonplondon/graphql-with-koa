@@ -1,0 +1,20 @@
+"""
+Base Query type, use to increment functionality through extension
+"""
+type Query {
+  _empty: Boolean!
+}
+
+"""
+Base Mutation type, use to increment functionality through extension
+"""
+type Mutation {
+  _empty: Boolean!
+}
+
+"""
+Base Subscription type, use to increment functionality through extension
+"""
+type Subscription {
+  _empty: Boolean!
+}

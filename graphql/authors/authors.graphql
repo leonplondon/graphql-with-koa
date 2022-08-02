@@ -1,0 +1,23 @@
+# Attach custom type to GraphQL nodes
+extend type Query {
+  author(filter: AuthorFilter!): Author!
+}
+
+"""
+A type definition
+"""
+type Author {
+  id: Int!
+  name: String!
+  username: String
+  email: String
+  website: String
+}
+
+"""
+A type definition
+"""
+input AuthorFilter {
+  id: Int!
+  active: Boolean
+}

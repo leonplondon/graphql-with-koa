@@ -1,9 +1,7 @@
-const baseTypes = require('./baseTypes');
-const baseRoots = require('./baseResolvers');
 
-const { types, resolvers } = require('./artifactsLoader');
+const { types: typeDefs, resolvers } = require('./artifactsLoader');
 
 module.exports = {
-  typeDefs: [baseTypes, ...types],
-  resolvers: [baseRoots, ...resolvers],
+  typeDefs,
+  resolvers,
 };

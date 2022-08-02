@@ -1,0 +1,31 @@
+# Attach custom type to GraphQL nodes
+extend type Query {
+  posts: [Post!]!
+  post(id: ID!): Post!
+}
+
+# Attach custom type to GraphQL nodes
+extend type Mutation {
+  createPost(post: PostInput!): ID!
+}
+
+"""
+A type definition
+"""
+type Post {
+  id: ID!
+  userId: String!
+  title: String!
+  body: String!
+  author: Author!
+}
+
+"""
+An input type definition
+"""
+input PostInput {
+  author: Int!
+  body: String!
+  title: String!
+  userId: Int!
+}
