@@ -21,7 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "@koa/router": "9.0.0",
-    "apollo-server-core": "3.10.0",
+    "apollo-server-core": "3.12.1",
     "apollo-server-koa": "3.10.0",
     "axios": "0.27.2",
     "dotenv": "8.2.0",
