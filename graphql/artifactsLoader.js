@@ -1,7 +1,7 @@
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
 
-const { gql } = require('apollo-server-koa');
+const gql = require('graphql-tag');
 const fs = require('fs');
 const path = require('path');
 
